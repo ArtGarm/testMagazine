@@ -53,6 +53,10 @@ export const store = new Vuex.Store({
             state.addedCartList.splice( finder , 1 );
         },
 
+        clearCart(state){
+            state.addedCartList = [];
+        },
+
         singleItemState( state, data ){
             state.singleItem = data;
         }
@@ -215,6 +219,12 @@ export const store = new Vuex.Store({
             
             context.commit('itemsCounterInCart', SUMM ); 
             context.commit('removeItemInCart', itemID ); 
+        },
+
+        clearAllCart: ( context )=>{
+            localStorage.setItem('itemAddToCart', '' );
+            context.commit('itemsCounterInCart', 0 ); 
+            context.commit('clearCart');
         },
 
         singleItem : (context, itemID) =>{

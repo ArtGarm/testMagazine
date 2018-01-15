@@ -7,7 +7,7 @@
                         <div class="name"> Cart </div>
                     </div>
                     <single-item 
-                        v-for="(item, index) in sortedArray" 
+                        v-for="(item ) in sortedArray" 
                         :key="item.keyval" 
                         :keyval="item.keyval" 
                         :name="item.name"
@@ -19,9 +19,14 @@
                         v-on:deleteItem="deleteItem"
                     >
                     </single-item>
-                    <div class="summury">
-                        <div class="summ-title">Summ</div>
-                        <div class="result"> <span> {{ calculateSumm }} </span> $ </div>
+                    <div class="siders" >
+                        <div class="butt" @click="clearAllCart()">
+                            <span>delete all</span>
+                        </div>
+                        <div class="summury">
+                            <div class="summ-title">Summ</div>
+                            <div class="result"> <span> {{ calculateSumm }} </span> $ </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,6 +98,10 @@
 
             deleteItem( keyval ){
                 this.$store.dispatch('deleteItemInCart', keyval );
+            },
+
+            clearAllCart(){
+                this.$store.dispatch('clearAllCart');
             }
 
         }
@@ -114,10 +123,11 @@
         .header-list{ display: block; padding: 10px; text-align: center; font-size: 20px; border-bottom: 1px solid #ccc;}
     }
     
-    .summury{ padding: 20px 30px; display: flex; align-items: center; justify-content: flex-end;
+    .siders{ padding: 20px 30px 20px 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
         .summ-title{ font-size: 24px; }
         .result{width: 150px; text-align: center; margin: 0 10px; font-size: 18px;
             span{ color: crimson; font-size: 24px;}
         }
+        .summury{display: flex; align-items: center; justify-content: flex-end;}
     }
 </style>
