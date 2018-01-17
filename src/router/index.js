@@ -4,6 +4,9 @@ import Index from '@/components/index'
 import Catalog from '@/components/catalog'
 import Cart from '@/components/cart'
 import Single from '@/components/item'
+import Form from '@/components/zakaz'
+import ty from '@/components/ty'
+
 
 Vue.use(Router)
 
@@ -28,6 +31,17 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    },
+    {
+      path: '/form',
+      name: 'Form',
+      component: Form
+    },
+    {
+      path: '/ty',
+      name: 'Ty',
+      component: ty
     }
+    
   ]
 })

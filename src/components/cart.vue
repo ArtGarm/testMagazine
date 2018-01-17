@@ -27,6 +27,11 @@
                             <div class="summ-title">Summ</div>
                             <div class="result"> <span> {{ calculateSumm }} </span> $ </div>
                         </div>
+                        <div class="create-zakaz">
+                            <router-link to="/form" class="butt">
+                                <span>оформить заказ</span>
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,8 +41,8 @@
                 <h2>Your cart is empty</h2>
                 <p>Add some items to cart to buy it</p>
                 <div class="after-butt">
-                    <router-link to="/catalog" class="butt">
-                        <span>return to catalog</span>
+                    <router-link to="/" class="butt">
+                        <span>return to main</span>
                     </router-link>
                 </div>
             </div>
@@ -111,7 +116,7 @@
 
 <style lang="scss" scoped>
     .cart-conteiner{padding: 25px 0;}
-    .cart-is-empty{ text-align: center; padding-top: 25px; padding-bottom: 25px; display: flex; align-content: center; align-items: center; justify-content: center; min-height: calc(100vh - 114px - 46px);
+    .cart-is-empty{ text-align: center; padding-top: 25px; padding-bottom: 25px; display: flex; align-content: center; align-items: center; justify-content: center; min-height: calc(100vh - 114px - 146px);
         .contein-texter{display: block; height: auto;}
         h2{margin: 0; padding-bottom: 15px; font-size: 32px;}
         p{margin: 0; padding-bottom: 15px; font-size: 18px;}
@@ -119,13 +124,13 @@
     }
 
     .list-items{ padding: 20px 0;
-        .list-conteiner{ border: 1px solid #ccc; }
+        .list-conteiner{ /*border: 1px solid #ccc;*/ background-color: #fff; }
         .header-list{ display: block; padding: 10px; text-align: center; font-size: 20px; border-bottom: 1px solid #ccc;}
     }
     
-    .siders{ padding: 20px 30px 20px 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    .siders{ padding: 20px 10px 20px 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
         .summ-title{ font-size: 24px; }
-        .result{width: 150px; text-align: center; margin: 0 10px; font-size: 18px;
+        .result{width: auto; text-align: center; margin: 0 10px; font-size: 18px;
             span{ color: crimson; font-size: 24px;}
         }
         .summury{display: flex; align-items: center; justify-content: flex-end;}

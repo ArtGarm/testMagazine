@@ -40,7 +40,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .item{ width: 100%; border-bottom: 1px solid #ccc; display: flex; align-items: center; justify-content: space-between; padding: 10px;
+    .item{ width: 100%; border-bottom: 1px solid #ccc; background-color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 10px;
         &:last-child{border: none;}
         .con{ width: 160px; height: 160px; position: relative; overflow: hidden;  display: block; text-decoration: none;
             img{max-width: none; min-width: 110%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }

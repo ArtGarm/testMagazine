@@ -59,6 +59,10 @@ export const store = new Vuex.Store({
 
         singleItemState( state, data ){
             state.singleItem = data;
+        },
+
+        sendZakaz(state) {
+
         }
         
     },
@@ -235,6 +239,32 @@ export const store = new Vuex.Store({
                 context.commit('singleItemState', curr );     
             });
             
+        },
+
+        sendMail : (context , content ) =>{
+            return new Promise((resolve, reject) => {
+                var data = new FormData();
+                data.append( "name", JSON.stringify(  content.name  ) );
+                data.append( "mail", JSON.stringify(  content.mail  ) );
+                data.append( "tel", JSON.stringify(  content.tel  ) );
+
+                let stekArr = '';
+                content.stack.forEach( (item) => {
+                    stekArr += 'Название ' + item.name + ' количество ' + item.count  + "<br />";
+                });
+
+                data.append( "zakaz", stekArr );
+
+                fetch('/ajax.php',{
+                    method: "POST",
+                    body: data
+                }).then(() =>{
+                    context.commit('itemsCounterInCart', 0 ); 
+                    context.commit('clearCart');
+                    localStorage.setItem('itemAddToCart', '' );
+                });
+                resolve();
+            })   
         }
     }
 })
