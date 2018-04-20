@@ -5,13 +5,13 @@
             <img :src="image" alt="">
         </router-link>
 
-        <router-link to="/catalog" class="name"> {{ name }} </router-link>
+        <router-link to="/" class="name"> {{ name }} </router-link>
         <div class="count">
             <div class="minus" @click="minuso()" > - </div>
             <div class="counter"> {{ count }} </div>
             <div class="plus"  @click="pluso()" > + </div>
         </div>
-        <div class="price"> <span>{{ price }}</span>$/1</div>
+        <div class="price"> <span>{{ price }}</span>₴</div>
         <div class="delete" @click="deleteItem()"> x </div>
     </div>
 
@@ -47,7 +47,7 @@
         }
         .delete{ width: 30px; height: 30px; background-color: crimson; border-radius: 4px; text-align: center;color: #fff; line-height: 26px; cursor: pointer; }
         .price{ width: 150px; text-align: center; font-size: 16px;
-            span{color: crimson; font-size: 20px; margin-right: 2px; }
+            span{ font-size: 20px; margin-right: 2px; }
         }
 
         .count{ width: 140px; margin: 0 10px; display: flex; align-items: center; justify-content: center; 
@@ -61,4 +61,14 @@
         }
         .name{ width: calc(100% - 160px - 30px - 150px - 160px); padding: 0 10px; font-size: 20px; text-decoration: none; color: #000; }
     }
+
+    @media screen and (max-width: 960px) {
+        .item{flex-wrap: wrap; justify-content: center; position: relative;
+            .name{ width:100%; text-align: center;}
+            .count{width: 100%; margin: 10px 0;}
+            .price{ width: 100%;}
+            .delete{ position: absolute; top: 5px; right: 5px;}
+        }
+    }
+
 </style>

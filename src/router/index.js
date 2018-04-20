@@ -6,7 +6,7 @@ import Cart from '@/components/cart'
 import Single from '@/components/item'
 import Form from '@/components/zakaz'
 import ty from '@/components/ty'
-
+import deliver from '@/components/deliver'
 
 Vue.use(Router)
 
@@ -41,6 +41,11 @@ export default new Router({
       path: '/ty',
       name: 'Ty',
       component: ty
+    },
+    {
+      path: '/deliver',
+      name: 'Deliver',
+      component: deliver
     }
     
   ]

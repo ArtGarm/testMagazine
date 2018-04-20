@@ -1,6 +1,8 @@
 <template>
 
-    <div class="item">
+    <div class="item" 
+        v-bind:style="{ order: calcOrder }"
+    >
         <router-link :to="{ name: 'Single', params: { id: keyval }}" class="con">
             <img :src="image" alt="">
         </router-link>
@@ -18,9 +20,14 @@
                 </div>
 
                 <div class="butt" @click="addToCart">
-                    <span> add to cart </span>
+                    <span> Замовити </span>
                 </div>
                 
+            </div>
+            <div class="deleter" v-if="godMode">
+                <button @click="deleteItem()">
+                    <span>DELETE</span>
+                </button>
             </div>
         </div>
     </div>
@@ -30,11 +37,35 @@
 <script>
 
     export default {
-        props : ['name' , 'descript', 'price', 'image', 'keyval' ],
+        props : ['name' , 'descript', 'price', 'image', 'keyval', 'typeItem' ],
         name : 'singleItem',
+        computed : {
+            godMode(){
+                return !this.$store.state.godMode;
+            },
+            calcOrder(){
+                console.log( this.typeItem );
+                if ( this.typeItem == 1 ) {
+                    return 1;
+                }
+                if ( this.typeItem == 2 ) {
+                    return 4;
+                }
+                if ( this.typeItem == 2 ) {
+                    return 2;
+                }
+                if ( this.typeItem == 4 ) {
+                    return 3;
+                }
+                
+            }
+        },
         methods : {
             addToCart(){
                 this.$store.dispatch('addItemToCart', this.keyval );
+            },
+            deleteItem(){
+                this.$store.dispatch('deleteItem', this.keyval );
             }
         }
     }
@@ -53,8 +84,13 @@
             p{margin: 0; font-size: 14px; font-weight: 300; line-height: 1.4;}
         }
         .price{ text-align: center; font-size: 28px;
-            span{ color: crimson;font-weight: 700;}
+            span{font-weight: 700;}
         }
         .add-to-cart{display: flex; align-items: center; justify-content: space-between; position: absolute; bottom: 15px; left: 15px; right: 15px;}
+        .deleter{padding: 10px; text-align: center; 
+            button{padding: 10px; display: inline-block;}
+        }
     }
+
+
 </style>

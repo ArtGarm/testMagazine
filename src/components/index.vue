@@ -9,33 +9,34 @@
         <div class="catalog">
             <div class="mbox">
                 <div class="list-items">
-                    <single-item v-for="(item, index) in listItems" :key="index" 
+                    <single-item 
+                        v-for="(item, index) in listItems" 
+                        :key="index" 
                         :name="item.name"
                         :descript="item.descript"
                         :price="item.price"
                         :keyval="item.key"
                         :image='item.image'
+                        :typeItem='item.type'
                     ></single-item>
                 </div>      
-                <!--
-                <div class="full-catalog">
-                    <router-link to="/catalog" class="butt">
-                        <span> full catalog </span>
-                    </router-link>
+                
+                <div class="full-catalog" v-if="godMode">
+                    <div class="butt" @click="addItemToCatelog()">
+                        <span> Додати товар </span>
+                    </div>
                 </div>  
-                -->        
+                     
             </div>
         </div>
         <div class="text-part">
             <div class="mbox">
                 <div class="texter">
-                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, iusto. Maiores, ullam suscipit. Delectus odit dolorum doloribus natus reiciendis fuga sequi nemo nisi, odio ratione? Ad nostrum sit illo ab.</h2>
+                    <h2>Про нас</h2>
                     <div class="colomn">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim labore voluptatum molestias amet eveniet quia accusantium distinctio vero, nihil neque quam numquam repellendus recusandae modi sunt adipisci. Asperiores, pariatur quaerat.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim labore voluptatum molestias amet eveniet quia accusantium distinctio vero, nihil neque quam numquam repellendus recusandae modi sunt adipisci. Asperiores, pariatur quaerat.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim labore voluptatum molestias amet eveniet quia accusantium distinctio vero, nihil neque quam numquam repellendus recusandae modi sunt adipisci. Asperiores, pariatur quaerat.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim labore voluptatum molestias amet eveniet quia accusantium distinctio vero, nihil neque quam numquam repellendus recusandae modi sunt adipisci. Asperiores, pariatur quaerat.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim labore voluptatum molestias amet eveniet quia accusantium distinctio vero, nihil neque quam numquam repellendus recusandae modi sunt adipisci. Asperiores, pariatur quaerat.</p>
+                        <p>Rotata Pizza - це молода компанія, яка оптимізувала процес приготування піци, скоротила його до 3-х хвилин та довела це на практиці! Наша місія - показати, що ресторан-піцерія - це водночас швидко, смачно і корисно. <p>
+                        <p>На розробку власної рецептури тіста ми витратили: 20 видів муки (при різних умовах та температурах випікання). Гори тіста було зіпсовано, допоки ми визначились з мукою, температурою, формою та часом випікання. Власна розробка RRO - піч на дровах з обертаючим дном, яка розігрівається до температури 400 градусів. </p>
+                        <p>Результат наших старань - найшвидша піца! Всього 3 хвилини та піца готова. Ми приймаємо виклик і готові поборотися за рекорд Гіннеса. Наші досягнення: гаряча піца на свіжому тісті в дров’яній печі з суворо відібраних продуктів, автоматизована система замовлення та високий рівень сервісу.</p>
                     </div>
                 </div>
             </div>
@@ -54,18 +55,34 @@
             singleItem
         },
         created : function(){
-            
+            this.$store.dispatch('godMode');
             this.$store.dispatch('onLoadCatalog');
            // this.$store.dispatch('onLoadMain');
         },
+
+        data(){
+            return{
+                isPopupOpen : true
+            }
+        },
+        
         computed :{
             listItems(){
                 return this.$store.state.catalogFull;
                 //return this.$store.state.itemOnMain;
+            },
+            godMode(){
+                return !this.$store.state.godMode;
+            }, 
+            script(){
+                return this.$store.state.insertScript;
             }
         },
         methods : {
-
+            addItemToCatelog(){
+                this.$store.dispatch('createNewItem');
+            }
+            
         }
         
     }
@@ -91,4 +108,12 @@
             &:first-child{margin-top: 0;}
         }
     }
+    @media screen and (max-width: 767px) {
+        .texter .colomn{ column-count: 1; }
+        .bunner{ position: relative; overflow: hidden; width: 100%; max-height: 275px; height: auto; margin: 15px 0 0;
+            img{ position: static; transform: none;}
+        }
+    }
+
+    
 </style>

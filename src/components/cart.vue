@@ -4,7 +4,7 @@
             <div class="list-items">
                 <div class="list-conteiner">
                     <div class="header-list">
-                        <div class="name"> Cart </div>
+                        <div class="name"> Кошик </div>
                     </div>
                     <single-item 
                         v-for="(item ) in sortedArray" 
@@ -19,17 +19,26 @@
                         v-on:deleteItem="deleteItem"
                     >
                     </single-item>
+                    <div class="deliver">
+                        <div class="text-minimum" v-if="calculateSumm < 75"> Мінімальна сума замовлення 75₴ </div>
+                        <div class="text-minimum" v-if="isDeliverCanBeDone < 1"> Доставка пончиків можлива лише за умови замовлення піци або кальцоне </div>
+                        <div class="name"> Доставка безкоштовна </div>
+
+                        <!--
+                            <div class="summ"> {{ deliverPrice }}₴ </div>
+                        -->
+                    </div>
                     <div class="siders" >
                         <div class="butt" @click="clearAllCart()">
-                            <span>delete all</span>
+                            <span>очистити корзину</span>
                         </div>
                         <div class="summury">
-                            <div class="summ-title">Summ</div>
-                            <div class="result"> <span> {{ calculateSumm }} </span> $ </div>
+                            <div class="summ-title">Загальна сума замовлення</div>
+                            <div class="result"> <span> {{ calculateSumm }} </span> ₴ </div>
                         </div>
                         <div class="create-zakaz">
-                            <router-link to="/form" class="butt">
-                                <span>оформить заказ</span>
+                            <router-link to="/form" class="butt" :class="{ pointer : calculateSumm < 75 }">
+                                <span>оформити замовлення</span>
                             </router-link>
                         </div>
                     </div>
@@ -38,11 +47,11 @@
         </div>
         <div class="mbox cart-is-empty" v-else>
             <div class="contein-texter">
-                <h2>Your cart is empty</h2>
-                <p>Add some items to cart to buy it</p>
+                <h2>Ваш кошик порожній</h2>
+                <p>Поверніться на головну і додайте товари</p>
                 <div class="after-butt">
                     <router-link to="/" class="butt">
-                        <span>return to main</span>
+                        <span>на головну</span>
                     </router-link>
                 </div>
             </div>
@@ -70,12 +79,27 @@
                 return this.$store.state.addedCartList
             },
 
+            deliverPrice(){
+                let sum = 0;
+
+                this.listItems.forEach( ( item ) => {
+
+                    if ( item.type == 1 ){
+                        sum+= item.count * 0;
+                    }
+                    
+                });
+
+                return sum;
+                
+            },
+
             calculateSumm(){
                 let summ = 0;
                 this.listItems.forEach( ( item ) => {
                     summ+= item.price * item.count;
                 });
-                return summ;
+                return summ + this.deliverPrice; 
             },
             sortedArray: function() {
                 function compare(a, b) {
@@ -89,6 +113,20 @@
                 }
 
                 return this.listItems.sort(compare);
+            },
+
+            isDeliverCanBeDone(){
+
+                let donut = 0;
+                this.listItems.forEach( ( item ) => {
+                
+                    if ( item.type != 4 ){
+                        donut += 1;
+                    }
+                    
+                });
+                return donut;
+
             }
         },
         methods: {
@@ -129,10 +167,24 @@
     }
     
     .siders{ padding: 20px 10px 20px 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-        .summ-title{ font-size: 24px; }
-        .result{width: auto; text-align: center; margin: 0 10px; font-size: 18px;
-            span{ color: crimson; font-size: 24px;}
+        .summ-title{ font-size: 24px; text-align: center; }
+        .result{width: auto; text-align: center; margin: 0 10px; font-size: 18px; 
+            span{  font-size: 24px;}
         }
-        .summury{display: flex; align-items: center; justify-content: flex-end;}
+        .summury{display: block; align-items: center; justify-content: flex-end;}
+    }
+    .deliver{ border-bottom: 1px solid #ccc; padding: 20px 10px; display: block; text-align: center;
+        .name{ font-size: 20px;}
+        .text-minimum{padding-bottom: 10px; font-size: 20px; color: #f35d21; font-weight: 400;}
+        .summ{font-size: 20px; margin: 0 10px;}
+    }
+    .butt.pointer{background-color: #535353; pointer-events: none; }
+
+    @media screen and (max-width: 767px) {
+        .siders>.butt{display: none;}
+        .siders .summury{width: 100%; justify-content: center;}
+        .siders .create-zakaz{ width: 100%; padding-top: 15px; 
+            .butt{max-width: 260px; margin: 0 auto;}
+        }
     }
 </style>

@@ -1,5 +1,5 @@
 <?php
-    $subject = 'Заявка с сайта';
+    $subject = 'Заявка с сайта http://if.rotata.pizza/';
     $mess = '';
     $mess .= '<hr>';
     if(isset($_POST['info'])) {
@@ -13,15 +13,21 @@
         $tel = substr(htmlspecialchars(trim($_POST['tel'])), 0, 100);
         $mess .= '<b>Телефон:</b>' . $tel . '<br>';
     }
-    if(isset($_POST['mail'])) {
-        $mail = substr(htmlspecialchars(trim($_POST['mail'])), 0, 100);
-        $mess .= '<b>Почта:</b>' . $mail . '<br>';
+    if(isset($_POST['adress'])) {
+        $adress = substr(htmlspecialchars(trim($_POST['adress'])), 0, 100);
+        $mess .= '<b>Адреса:</b>' . $adress . '<br>';
     }
     if(isset($_POST['zakaz'])) {
-        $zakaz = substr(htmlspecialchars(trim($_POST['zakaz'])), 0, 10000);
-        $mess .= '<b>Заказ: </b><br />' . $zakaz . '<br>';
+        $zakaz = $_POST['zakaz'];
+        $mess .= '<b>Замовлення: </b><br />' . $zakaz . '<br>';
     }
 
+    if(isset($_POST['summ'])) {
+        $summ = substr(htmlspecialchars(trim($_POST['summ'])), 0, 10000);
+        $mess .= '<b>Сума замовлення: </b><br />' . $summ . '<br>';
+    }
+
+    
 
     
     $mess .= '<hr>';
@@ -29,7 +35,8 @@
     require 'class.phpmailer.php';
 
     $mail = new PHPMailer();
-    $mail->AddAddress('malkovych@gmail.com','');   // кому - адрес, Имя
+    $mail->AddAddress('order@rotata.pizza','');   // кому - адрес, Имя
+    $mail->AddAddress('artem.garmatyk@gmail.com','');   // кому - адрес, Имя
     $mail->IsHTML(true);                        // выставляем формат письма HTML
     $mail->Subject = $subject; // тема письма
     $mail->CharSet = "UTF-8";                   // кодировка

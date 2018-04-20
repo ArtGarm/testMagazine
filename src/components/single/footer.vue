@@ -6,15 +6,16 @@
                 <a href="http://rotata.pizza/">
                     <img width="80" height="54" src="http://if.rotata.pizza/images/logonew.png" class="custom-logo">
                 </a>	
-                <h4>Rotata Pizza – <br /> твій особистий космос!</h4>
+                <h4>Rotata Pizza – <br /> 59 хвилин або безкоштовно / в межах центру /</h4>
             </div>
 
             <div class="footer_contacts">
                 <h2>Контакти</h2>
                 <ul>
                     <li>+ 38 (050)-479-45-45</li>
+                    <li>+ 38 (073)-479-45-45</li>
                     <li>Івано-Франківськ, вул. Грушевского 1</li>
-                    <li>box@rotata.pizza</li>
+                    <li>order@rotata.pizza</li>
                 </ul>
             </div>
 
@@ -29,6 +30,16 @@
                     <li>
                         <a href="https://www.facebook.com/rotatadrive/" target="_blank">
                             <img src="https://facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/fb-art.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/ua/app/rotata-pizza/id1337738366" target="_blank">
+                            <img src="/images/app.png" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://play.google.com/store/apps/details?id=com.genisoft.launcher74759" target="_blank">
+                            <img src="/images/google.png" alt="">
                         </a>
                     </li>
                 </ul>
@@ -66,6 +77,10 @@
                 }
             }
         }
+    }
+
+    @media screen and (max-width: 767px) {
+        .footer .footer_contacts{margin: 20px 0;}
     }
     
 
